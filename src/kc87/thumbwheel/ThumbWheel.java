@@ -134,7 +134,6 @@ public class ThumbWheel extends TextureView implements SurfaceTextureListener
       mMatDefOuter = matDGray;
       mMatSpecOuter = matSGray;
 
-      mRenderThread = new GLRenderThread();
       setSurfaceTextureListener(this);
    }
 
@@ -238,6 +237,8 @@ public class ThumbWheel extends TextureView implements SurfaceTextureListener
    @Override
    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
    {
+      Log.d(LOG_TAG, "onSurfaceTextureAvailable()");
+      mRenderThread = new GLRenderThread();
       mRenderThread.mmSurfaceTexture = surface;
       mRenderThread.mmWidth = width;
       mRenderThread.mmHeight = height;
@@ -253,8 +254,10 @@ public class ThumbWheel extends TextureView implements SurfaceTextureListener
    @Override
    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface)
    {
+      Log.d(LOG_TAG, "onSurfaceTextureDestroyed()");
       if (mRenderThread != null) {
          mRenderThread.stopRender();
+         mRenderThread = null;
       }
       return true;
    }
@@ -428,7 +431,6 @@ public class ThumbWheel extends TextureView implements SurfaceTextureListener
       private float mmRotation = 0.0f;
 
       private AtomicInteger mmWheelState = new AtomicInteger();
-      //private volatile float mmValue = 0.0f;
       private volatile float mmCurrent = 0.0f;
 
       private void initEGL()
