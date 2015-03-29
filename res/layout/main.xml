@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:thumbwheel="http://schemas.android.com/apk/res/kc87.thumbwheel"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3">
+
+        <FrameLayout android:id="@+id/wheel_1_frame"
+                     android:layout_width="wrap_content"
+                     android:layout_height="match_parent"
+                     android:layout_margin="20dp"
+                     android:layout_centerHorizontal="true"
+                     android:padding="6dp"
+                     android:background="@drawable/wheel_frame_bg">
+
+            <kc87.thumbwheel.ThumbWheel android:id="@+id/wheel_1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        thumbwheel:orientation="vertical"
+                                        thumbwheel:boundaryMode="repeat"
+                                        thumbwheel:minValue="-50"
+                                        thumbwheel:maxValue="50"/>
+        </FrameLayout>
+
+        <TextView android:id="@+id/wheel_1_value"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_toRightOf="@id/wheel_1_frame"
+                  android:layout_centerVertical="true"
+                  android:layout_margin="0dp"
+                  android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+        <TextView android:id="@+id/wheel_2_value"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerHorizontal="true"
+                  android:textSize="20sp"/>
+
+        <FrameLayout android:id="@+id/wheel_2_frame"
+                     android:layout_width="wrap_content"
+                     android:layout_height="match_parent"
+                     android:layout_below="@id/wheel_2_value"
+                     android:layout_marginRight="20dp"
+                     android:layout_marginBottom="10dp"
+                     android:layout_marginLeft="20dp"
+                     android:layout_marginTop="8dp"
+                     android:padding="6dp"
+                     android:background="@drawable/wheel_frame_bg"
+                     tools:ignore="UselessParent">
+
+            <kc87.thumbwheel.ThumbWheel android:id="@+id/wheel_2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        thumbwheel:orientation="horizontal"
+                                        thumbwheel:boundaryMode="clamp"
+                                        thumbwheel:minValue="0"
+                                        thumbwheel:maxValue="255"/>
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

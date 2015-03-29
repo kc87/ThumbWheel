@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <declare-styleable name="ThumbWheel">
+       <attr name="minValue" format="float" />
+       <attr name="maxValue" format="float" />
+       <attr name="orientation" format="enum">
+           <enum name="horizontal" value="0"/>
+           <enum name="vertical" value="1"/>
+       </attr>
+       <attr name="boundaryMode" format="enum">
+           <enum name="repeat" value="0"/>
+           <enum name="clamp" value="1"/>
+       </attr>
+   </declare-styleable>
+</resources>
