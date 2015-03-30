@@ -414,6 +414,8 @@ public class ThumbWheel extends TextureView implements SurfaceTextureListener
    {
       private static final String LOG_TAG = "GLRenderThread";
       private static final int DELAY = (int) (1000.0f / FPS);
+      private static final float SPEED_LIMIT = 90.0f;
+      private static final float MM_DAMPING_FACTOR = 0.88f;
       private static final float VALUE_RESOLUTION_FACTOR = 0.4f;
 
       private volatile boolean mmRunning = true;
@@ -575,12 +577,12 @@ public class ThumbWheel extends TextureView implements SurfaceTextureListener
                drawFrame();
                mmWheelState.set(STATE.IDLE);
             } else if (mmCurrentState == STATE.RELEASED) {
-               mmDelta = Math.min(Math.max(mmDelta, -80.0f), 80.0f);
+               mmDelta = clampValue(mmDelta, -SPEED_LIMIT, SPEED_LIMIT);
                mmWheelState.set(STATE.IN_MOTION);
             } else if (mmCurrentState == STATE.IN_MOTION) {
                if (Math.abs(mmDelta) > 0.1f) {
-                  //FIXME: not yet perfect
-                  mmDelta *= 0.85;
+                  //Simulate mass motion
+                  mmDelta *= MM_DAMPING_FACTOR;
                   drawFrame();
                   try {
                      sleep(DELAY);
