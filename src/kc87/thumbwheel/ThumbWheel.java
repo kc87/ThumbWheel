@@ -311,6 +311,7 @@ public class ThumbWheel extends TextureView implements SurfaceTextureListener
    /*
     *   Calculate wheel geometry including vertex normals.
     *   This only happens once, when the class is loaded.
+    *   Data will be shared by all wheel instances
     */
 
    private static void initGeometry()
@@ -394,10 +395,10 @@ public class ThumbWheel extends TextureView implements SurfaceTextureListener
 
       ByteBuffer vertexNormalBuffer = ByteBuffer.allocateDirect(4 * sVertexNormal.length);
 
-      vertexNormalBuffer.order(ByteOrder.nativeOrder()); // Use native byte order
+      vertexNormalBuffer.order(ByteOrder.nativeOrder());
 
-      sVertexNormalBuffer = vertexNormalBuffer.asFloatBuffer(); // Convert byte buffer to float
-      sVertexNormalBuffer.put(sVertexNormal);      // Copy data into buffer
+      sVertexNormalBuffer = vertexNormalBuffer.asFloatBuffer();
+      sVertexNormalBuffer.put(sVertexNormal);
    }
 
    private static void addVertexNormal(int i, float vx, float vy, float vz, float nx, float ny, float nz)
@@ -522,10 +523,10 @@ public class ThumbWheel extends TextureView implements SurfaceTextureListener
       private void drawFrame()
       {
          if (mBoundaryMode == BoundaryMode.REPEAT) {
-            mValue = repeatValue(mValue + VALUE_RESOLUTION_FACTOR* mmDelta, mMinValue, mMaxValue);
+            mValue = repeatValue(mValue + VALUE_RESOLUTION_FACTOR * mmDelta, mMinValue, mMaxValue);
             mmRotation += mmDelta;
          } else if (mBoundaryMode == BoundaryMode.CLAMP){
-            mValue = clampValue(mValue + VALUE_RESOLUTION_FACTOR* mmDelta, mMinValue, mMaxValue);
+            mValue = clampValue(mValue + VALUE_RESOLUTION_FACTOR * mmDelta, mMinValue, mMaxValue);
             if (mValue == mMaxValue || mValue == mMinValue) {
                mmDelta = -mmDelta;
             } else {
